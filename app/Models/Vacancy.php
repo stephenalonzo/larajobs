@@ -11,8 +11,9 @@ class Vacancy extends Model
 
     protected $fillable = [
         'title',
-        'description',
         'company',
-        'location'
+        'location',
+        'logo',
+        'description'
     ];
 }

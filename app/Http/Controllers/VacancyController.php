@@ -26,7 +26,7 @@ class VacancyController extends Controller
      */
     public function create()
     {
-        //
+        return view('vacancies.create');
     }
 
     /**
@@ -37,7 +37,21 @@ class VacancyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'company' => 'required',
+            'location' => 'required',
+            'description' => 'required'
+        ]);
+
+        if($request->hasFile('logo'))
+        {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+
+        Vacancy::create($formFields);
+
+        return redirect('/')->with('message', 'Vacancy created successfully!');
     }
 
     /**
@@ -46,9 +60,11 @@ class VacancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Vacancy $vacancy)
     {
-        //
+        return view('vacancies.show', [
+            'vacancy' => $vacancy
+        ]);
     }
 
     /**
@@ -57,9 +73,11 @@ class VacancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Vacancy $vacancy)
     {
-        //
+        return view('vacancies.edit', [
+            'vacancy' => $vacancy
+        ]);
     }
 
     /**
@@ -69,9 +87,18 @@ class VacancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Vacancy $vacancy)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'company' => 'required',
+            'location' => 'required',
+            'description' => 'required'
+        ]);
+
+        $vacancy->update($formFields);
+
+        return back()->with('message', 'Vacancy updated successfully!');
     }
 
     /**

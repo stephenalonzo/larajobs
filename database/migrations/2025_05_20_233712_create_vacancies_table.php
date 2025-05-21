@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('description');
             $table->string('company');
             $table->string('location');
+            $table->longText('logo')->nullable();
             $table->timestamps();
         });
     }
