@@ -17,7 +17,8 @@ class VacancyFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->title(),
+            'title' => fake()->sentence(3),
+            'user_id' => fake()->numberBetween(1, 15),
             'description' => fake()->paragraph(),
             'company' => fake()->company(),
             'location' => fake()->city()

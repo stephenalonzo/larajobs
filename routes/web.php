@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,26 @@ Route::get('/vacancies/{vacancy}/edit', [VacancyController::class, 'edit']);
 // Update Vacancy
 Route::put('/vacancies/{vacancy}', [VacancyController::class, 'update']);
 
+// Delete Vacancy
+Route::get('/vacancies/{vacancy}/delete', [VacancyController::class, 'destroy']);
+
+// Manage Vacancies
+Route::get('/vacancies/manage', [VacancyController::class, 'manage']);
+
+// Show Login Form
+Route::get('/login', [UserController::class, 'index']);
+
+// Show Registration Form
+Route::get('/register', [UserController::class, 'create']);
+
+// Register User
+Route::post('/users', [UserController::class, 'store']);
+
 // Single Vacancy
 Route::get('/vacancies/{vacancy}', [VacancyController::class, 'show']);
+
+// Logout User
+Route::post('/logout', [UserController::class, 'destroy']);
+
+// Login User
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);

@@ -15,7 +15,7 @@ class VacancyController extends Controller
     public function index()
     {
         return view('vacancies.index', [
-            'vacancies' => Vacancy::latest()->get()
+            'vacancies' => Vacancy::latest()->filter(request(['search']))->paginate(4)
         ]);
     }
 
@@ -48,6 +48,8 @@ class VacancyController extends Controller
         {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
+
+        $formFields['user_id'] = auth()->id();
 
         Vacancy::create($formFields);
 
@@ -101,14 +103,23 @@ class VacancyController extends Controller
         return back()->with('message', 'Vacancy updated successfully!');
     }
 
+    public function manage()
+    {
+        return view('vacancies.manage', [
+            'vacancies' => Vacancy::where('user_id', auth()->id())->get()
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vacancy $vacancy)
     {
-        //
+        $vacancy->delete();
+
+        return redirect('/')->with('message', 'Vacancy deleted successfully');
     }
 }
