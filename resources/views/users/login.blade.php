@@ -13,6 +13,10 @@
                     <input type="email" id="email"
                         class="mt-0.5 p-2 w-full rounded border border-gray-300 shadow-sm bg-white sm:text-sm"
                         name="email" placeholder="ex. your@email.com" />
+
+                    @error('email')
+                        <p class="text-xs text-red-500">{{ $message }}</p>
+                    @enderror
                 </label>
             </div>
             <div>
@@ -23,6 +27,9 @@
                     <input type="password" id="password"
                         class="mt-0.5 p-2 w-full rounded border border-gray-300 shadow-sm bg-white sm:text-sm"
                         name="password" />
+                    @error('password')
+                        <p class="text-xs text-red-500">{{ $message }}</p>
+                    @enderror
                 </label>
             </div>
             <button

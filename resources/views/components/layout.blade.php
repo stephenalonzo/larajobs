@@ -22,15 +22,17 @@
             </a>
 
             <div class="flex flex-1 items-center justify-end md:justify-between">
-                <nav aria-label="Global" class="hidden md:block">
-                    <ul class="flex items-center gap-6 text-sm">
-                        <li>
-                            <a class="text-gray-500 transition hover:text-gray-500/75" href="/vacancies/manage">
-                                Manage Listings
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                @auth
+                    <nav aria-label="Global" class="hidden md:block">
+                        <ul class="flex items-center gap-6 text-sm">
+                            <li>
+                                <a class="text-gray-500 transition hover:text-gray-500/75" href="/vacancies/manage">
+                                    Manage Listings
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                @endauth
 
                 <label for="search" class="w-72">
                     <div class="relative">
